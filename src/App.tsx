@@ -1,28 +1,7 @@
-import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import Nav from "./components/nav";
-import SearchBox from "./components/search-box";
-import { useKeyBindings } from "./hooks/useKeyBindings";
 
 export default function App() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  useKeyBindings([
-    {
-      keys: ["Control", "k"], // Listen for "Ctrl + K"
-      callback: () => setIsOpen((prev) => !prev), // Toggle the search box
-    },
-    {
-      keys: ["Control", "d"], // Listen for "Ctrl + D"
-      callback: () => setIsOpen((prev) => !prev), // Toggle the search box
-    },
-    {
-      keys: ["Escape"], // Listen for "Escape"
-      callback: () => setIsOpen(false), // Close the search box
-    },
-  ]);
-
   return (
     <div className=" text-white text-3xl h-[100dvh] home__bg">
       <Nav />
@@ -52,8 +31,7 @@ export default function App() {
           </button>
           <button
             type="button"
-            className="items-center hidden h-12 px-4 space-x-3 text-left rounded-lg shadow-sm sm:flex w-72 ring-slate-900/10 focus:outline-none hover:ring-2 hover:ring-sky-500 focus:ring-2 focus:ring-sky-500 bg-slate-800 ring-0 text-slate-300 highlight-white/5 hover:bg-slate-700"
-            onClick={() => setIsOpen(true)}>
+            className="items-center hidden h-12 px-4 space-x-3 text-left rounded-lg shadow-sm sm:flex w-72 ring-slate-900/10 focus:outline-none hover:ring-2 hover:ring-sky-500 focus:ring-2 focus:ring-sky-500 bg-slate-800 ring-0 text-slate-300 highlight-white/5 hover:bg-slate-700">
             <BiSearch size={20} />
             <span className="flex-auto">Quick search...</span>
             <kbd className="font-sans font-semibold text-slate-500">
@@ -65,9 +43,6 @@ export default function App() {
           </button>
         </div>
       </div>
-      <AnimatePresence>
-        {isOpen && <SearchBox close={setIsOpen} />}
-      </AnimatePresence>
     </div>
   );
 }
